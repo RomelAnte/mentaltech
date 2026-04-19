@@ -1,0 +1,176 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Ábaco — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div style="padding:2rem 0 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">
+      ← Volver
+    </a>
+  </div>
+
+  <!-- ════════════════════════
+       PANTALLA 1: PRESENTACIÓN
+  ════════════════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <div class="presentation-header fade-in">
+      <span class="presentation-icon">🧮</span>
+      <h1 class="presentation-title">
+        El <span class="gradient-text">Ábaco</span>
+      </h1>
+      <p class="presentation-subtitle">
+        Una de las herramientas de cálculo más antiguas del mundo,
+        usada hoy para desarrollar habilidades matemáticas mentales
+        de forma extraordinaria.
+      </p>
+    </div>
+
+    <!-- Descripción -->
+    <div class="card fade-in stagger-1" style="margin:1.5rem 0;">
+      <div style="display:flex; gap:1.5rem; align-items:flex-start; flex-wrap:wrap;">
+        <div style="font-size:4rem; flex-shrink:0;">🧮</div>
+        <div>
+          <h3 style="font-family:var(--font-head); font-size:1.2rem; margin-bottom:.5rem;">¿Qué es el ábaco?</h3>
+          <p style="color:var(--text-muted); line-height:1.75;">
+            El ábaco es un instrumento de cálculo que utiliza bolas o cuentas
+            deslizables sobre varillas para representar y operar números.
+            Originado en Asia hace miles de años, su uso desarrolla
+            capacidades cognitivas sorprendentes en quienes lo practican.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beneficios -->
+    <h3 style="font-family:var(--font-head); font-size:1rem; margin-bottom:1rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; font-weight:600;">
+      Beneficios del ábaco
+    </h3>
+    <div class="benefits-grid fade-in stagger-2">
+      <div class="benefit-item">
+        <span class="benefit-icon">🎯</span>
+        <div class="benefit-text">
+          <strong>Concentración</strong>
+          <span>Entrena la atención plena durante el cálculo</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">⚡</span>
+        <div class="benefit-text">
+          <strong>Velocidad mental</strong>
+          <span>Aumenta la rapidez en operaciones matemáticas</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">🧠</span>
+        <div class="benefit-text">
+          <strong>Memoria</strong>
+          <span>Desarrolla la capacidad de retener números</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">🔢</span>
+        <div class="benefit-text">
+          <strong>Cálculo mental</strong>
+          <span>Permite operar sin papel ni calculadora</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instrucción de uso -->
+    <div class="card fade-in stagger-3" style="margin:1.25rem 0; border-color:rgba(56,189,248,0.3);">
+      <h3 style="font-family:var(--font-head); font-size:1rem; color:var(--accent3); margin-bottom:.75rem;">
+        💡 ¿Cómo usar esta herramienta?
+      </h3>
+      <ol style="color:var(--text-muted); line-height:2; padding-left:1.25rem; font-size:.9rem;">
+        <li>Presiona <strong style="color:var(--text);">"Generar número"</strong> para obtener un número aleatorio de hasta 4 cifras.</li>
+        <li>Represéntalo en tu ábaco físico moviendo las cuentas correspondientes.</li>
+        <li>Presiona <strong style="color:var(--text);">"Generar suma"</strong> para practicar operaciones de adición.</li>
+        <li>Realiza la operación en tu ábaco y luego verifica con <strong style="color:var(--text);">"Mostrar resultado"</strong>.</li>
+      </ol>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🔢 Generar números →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════
+       PANTALLA 2: ACTIVIDAD
+  ════════════════════════ -->
+  <div class="screen" id="screen-actividad">
+
+    <!-- Botones principales -->
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;" class="fade-in">
+      <button class="btn btn-primary btn-lg" onclick="generarNumero()">
+        🎲 Generar número
+      </button>
+      <button class="btn btn-secondary btn-lg" onclick="generarSuma()" style="border-color:rgba(56,189,248,0.4); color:var(--accent3);">
+        ➕ Generar suma
+      </button>
+    </div>
+
+    <!-- Área de display -->
+    <div id="display-area" class="fade-in">
+      <!-- Se llena con JS -->
+    </div>
+
+    <!-- Referencia de posiciones -->
+    <div class="card fade-in" style="margin-top:1.5rem;">
+      <h3 style="font-family:var(--font-head); font-size:.9rem; color:var(--text-muted); margin-bottom:.75rem; text-transform:uppercase; letter-spacing:.07em;">
+        📐 Referencia: Posición de las cuentas
+      </h3>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; text-align:center;">
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🟤</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Millares</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">1,000s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🔵</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Centenas</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">100s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🟢</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Decenas</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">10s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🔴</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Unidades</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">1s</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/abaco.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+    if (name === 'actividad') generarNumero();
+  }
+</script>
+{% endblock %}

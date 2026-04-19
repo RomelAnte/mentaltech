@@ -1,0 +1,195 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Anagramas — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- ── Tabs pantalla ── -->
+  <div style="padding:2rem 0 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">
+      ← Volver
+    </a>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       PANTALLA 1: PRESENTACIÓN
+  ════════════════════════════════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <div class="presentation-header fade-in">
+      <span class="presentation-icon">🔤</span>
+      <h1 class="presentation-title">
+        ¿Qué es un <span class="gradient-text">Anagrama</span>?
+      </h1>
+      <p class="presentation-subtitle">
+        Un anagrama es una palabra o frase que se forma reorganizando todas las letras
+        de otra palabra o frase, usando cada letra exactamente una vez.
+      </p>
+    </div>
+
+    <!-- Ejemplo visual -->
+    <div class="card fade-in stagger-1" style="margin:1.5rem 0; text-align:center;">
+      <p style="color:var(--text-muted); font-size:.9rem; margin-bottom:1rem;">Ejemplo clásico</p>
+      <div style="display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+        <div style="font-family:var(--font-head); font-size:1.8rem; font-weight:800; color:var(--accent1);">
+          CINEMATÓGRAFO
+        </div>
+        <div style="font-size:1.5rem; color:var(--text-muted);">→</div>
+        <div style="font-family:var(--font-head); font-size:1.8rem; font-weight:800; color:var(--accent4);">
+          MECANÓGRAFO TÍO
+        </div>
+      </div>
+      <p style="color:var(--text-muted); font-size:.85rem; margin-top:.75rem;">
+        Las mismas letras, ¡un significado completamente distinto!
+      </p>
+    </div>
+
+    <!-- Beneficios -->
+    <h3 style="font-family:var(--font-head); font-size:1.1rem; margin-bottom:1rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; font-weight:600;">
+      Beneficios cognitivos
+    </h3>
+    <div class="benefits-grid fade-in stagger-2">
+      <div class="benefit-item">
+        <span class="benefit-icon">🧠</span>
+        <div class="benefit-text">
+          <strong>Memoria</strong>
+          <span>Ejercita la retención y recuperación de información</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">🎯</span>
+        <div class="benefit-text">
+          <strong>Concentración</strong>
+          <span>Exige atención plena y enfoque sostenido</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">✨</span>
+        <div class="benefit-text">
+          <strong>Creatividad</strong>
+          <span>Estimula conexiones nuevas entre conceptos</span>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <span class="benefit-icon">⚡</span>
+        <div class="benefit-text">
+          <strong>Agilidad mental</strong>
+          <span>Aumenta la velocidad de procesamiento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Más ejemplos -->
+    <div class="card fade-in stagger-3" style="margin:1.5rem 0;">
+      <h3 style="font-family:var(--font-head); font-size:1rem; margin-bottom:1rem; color:var(--text-muted);">
+        Más ejemplos
+      </h3>
+      <div style="display:flex; flex-direction:column; gap:.75rem;">
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <span class="badge badge-blue" style="font-size:.95rem;">CALENDARIO</span>
+          <span style="color:var(--text-muted);">→</span>
+          <span class="badge badge-purple" style="font-size:.95rem;">ACLARO EN DIA</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <span class="badge badge-blue" style="font-size:.95rem;">CONVERSACIÓN</span>
+          <span style="color:var(--text-muted);">→</span>
+          <span class="badge badge-purple" style="font-size:.95rem;">CORONA DE VACAS</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🎮 Comenzar actividad →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════
+       PANTALLA 2: ACTIVIDAD
+  ════════════════════════════════════════ -->
+  <div class="screen" id="screen-actividad">
+
+    <!-- Marcador -->
+    <div class="score-bar fade-in">
+      <div class="score-item">
+        <div class="score-label">✅ Aciertos</div>
+        <div class="score-value" id="score-aciertos" style="transition:all .3s;">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">🎯 Intentos</div>
+        <div class="score-value" id="score-intentos">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">📊 Precisión</div>
+        <div class="score-value" id="score-pct">—</div>
+      </div>
+    </div>
+
+    <div class="activity-container">
+
+      <div class="card fade-in">
+        <p style="color:var(--text-muted); font-size:.85rem; text-align:center; margin-bottom:.5rem;">
+          Forma un anagrama con esta palabra:
+        </p>
+        <div class="big-word" id="word-original">CARGANDO...</div>
+
+        <!-- Input respuesta -->
+        <div class="input-group">
+          <input
+            type="text"
+            class="input-field"
+            id="user-input"
+            placeholder="Escribe el anagrama..."
+            autocomplete="off"
+          >
+          <button class="btn btn-primary" onclick="checkAnswer()">Verificar</button>
+        </div>
+
+        <!-- Feedback -->
+        <div class="feedback-box" id="feedback-box"></div>
+
+        <!-- Respuesta revelada -->
+        <div id="answer-reveal" style="display:none; margin-top:1rem;">
+          <p style="color:var(--text-muted); font-size:.85rem; margin-bottom:.5rem;">La respuesta es:</p>
+          <div style="font-family:var(--font-head); font-size:1.6rem; font-weight:700; color:var(--accent4);" id="answer-text"></div>
+        </div>
+
+        <!-- Botones de control -->
+        <div style="display:flex; gap:.75rem; margin-top:1.5rem; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="btn-reveal" onclick="revealAnswer()">
+            💡 Ver respuesta
+          </button>
+          <button class="btn btn-primary" onclick="nextAnagrama()">
+            Siguiente →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/anagramas.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+</script>
+{% endblock %}

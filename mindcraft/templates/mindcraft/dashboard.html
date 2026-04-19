@@ -1,0 +1,115 @@
+{% extends "mindcraft/base.html" %}
+{% block title %}MentalTech — Técnicas Avanzadas de Estudio{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- ── Hero ── -->
+  <section class="hero fade-in">
+    <p class="hero-label">✨ Demo Académica Interactiva</p>
+    <h1 class="hero-title">
+      Potencia tu<br>
+      <span class="gradient-text">Mente</span>
+    </h1>
+    <p class="hero-subtitle">
+      Explora técnicas avanzadas de aprendizaje a través de actividades interactivas
+      diseñadas para mejorar tu memoria, concentración y agilidad mental.
+    </p>
+    <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;">
+      <span class="badge badge-blue">🎓 Educativo</span>
+      <span class="badge badge-purple">🎮 Interactivo</span>
+      <span class="badge badge-green">⚡ Sin registro</span>
+      <span class="badge badge-pink">🎯 3 módulos</span>
+    </div>
+  </section>
+
+  <!-- ── Módulos ── -->
+  <section class="modules-grid">
+
+    <!-- Módulo 1: Anagramas -->
+    <a href="{% url 'anagramas' %}" class="module-card card-blue fade-in stagger-1">
+      <span class="module-icon">🔤</span>
+      <p class="module-number">Módulo 01</p>
+      <h2 class="module-title">Anagramas</h2>
+      <p class="module-desc">
+        Descubre cómo reorganizar letras para formar nuevas palabras.
+        Ejercita tu memoria, concentración y creatividad al máximo.
+      </p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+        <span class="badge badge-blue">Memoria</span>
+        <span class="badge badge-blue">Creatividad</span>
+        <span class="badge badge-blue">Agilidad</span>
+      </div>
+      <span class="module-arrow">Comenzar →</span>
+    </a>
+
+    <!-- Módulo 2: Palabras -->
+    <a href="{% url 'palabras' %}" class="module-card card-purple fade-in stagger-2">
+      <span class="module-icon">🧠</span>
+      <p class="module-number">Módulo 02</p>
+      <h2 class="module-title">Palabras</h2>
+      <p class="module-desc">
+        Aprende a distinguir entre palabras concretas (perceptibles con los sentidos)
+        y abstractas (ideas y emociones) con un quiz dinámico.
+      </p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+        <span class="badge badge-purple">Concretas</span>
+        <span class="badge badge-purple">Abstractas</span>
+        <span class="badge badge-purple">Quiz</span>
+      </div>
+      <span class="module-arrow" style="color:#a78bfa;">Comenzar →</span>
+    </a>
+
+    <!-- Módulo 3: Ábaco -->
+    <a href="{% url 'abaco' %}" class="module-card card-cyan fade-in stagger-3">
+      <span class="module-icon">🔢</span>
+      <p class="module-number">Módulo 03</p>
+      <h2 class="module-title">Ábaco</h2>
+      <p class="module-desc">
+        Genera números y ejercicios de suma para practicar con tu ábaco físico.
+        Desarrolla velocidad mental y concentración matemática.
+      </p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+        <span class="badge badge-green">Números</span>
+        <span class="badge badge-green">Sumas</span>
+        <span class="badge badge-green">Cálculo</span>
+      </div>
+      <span class="module-arrow" style="color:var(--accent3);">Comenzar →</span>
+    </a>
+
+  </section>
+
+  <!-- ── Info extra ── -->
+  <section style="padding:0 0 4rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;">
+    <div class="benefit-item fade-in stagger-1">
+      <span class="benefit-icon">🎯</span>
+      <div class="benefit-text">
+        <strong>Aprendizaje activo</strong>
+        <span>Cada módulo combina teoría y práctica inmediata</span>
+      </div>
+    </div>
+    <div class="benefit-item fade-in stagger-2">
+      <span class="benefit-icon">📊</span>
+      <div class="benefit-text">
+        <strong>Seguimiento en vivo</strong>
+        <span>Visualiza tu puntaje y progreso en tiempo real</span>
+      </div>
+    </div>
+    <div class="benefit-item fade-in stagger-3">
+      <span class="benefit-icon">🚀</span>
+      <div class="benefit-text">
+        <strong>Sin distracciones</strong>
+        <span>Interfaz limpia diseñada para enfoque total</span>
+      </div>
+    </div>
+    <div class="benefit-item fade-in stagger-4">
+      <span class="benefit-icon">💡</span>
+      <div class="benefit-text">
+        <strong>Ideal para demos</strong>
+        <span>Perfecto para presentaciones y exposiciones en vivo</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

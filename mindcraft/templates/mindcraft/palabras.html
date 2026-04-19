@@ -1,0 +1,167 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Palabras — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div style="padding:2rem 0 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">
+      ← Volver
+    </a>
+  </div>
+
+  <!-- ════════════════════════
+       PANTALLA 1: PRESENTACIÓN
+  ════════════════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <div class="presentation-header fade-in">
+      <span class="presentation-icon">🧠</span>
+      <h1 class="presentation-title">
+        Palabras <span class="gradient-text">Concretas</span><br>y <span class="gradient-text">Abstractas</span>
+      </h1>
+      <p class="presentation-subtitle">
+        El lenguaje divide las palabras según si hacen referencia a algo que
+        podemos percibir con los sentidos o a conceptos intangibles de la mente.
+      </p>
+    </div>
+
+    <!-- Comparativa -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin:1.5rem 0;" class="fade-in stagger-1">
+
+      <div class="card" style="border-color:rgba(52,211,153,0.3);">
+        <div style="font-size:2.5rem; margin-bottom:.75rem;">👁️</div>
+        <h3 style="font-family:var(--font-head); font-size:1.2rem; font-weight:700; color:var(--success); margin-bottom:.5rem;">
+          Palabras Concretas
+        </h3>
+        <p style="color:var(--text-muted); font-size:.9rem; line-height:1.65; margin-bottom:1rem;">
+          Son aquellas que hacen referencia a objetos, seres o cosas que pueden
+          percibirse con alguno de los cinco sentidos.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="badge badge-green">Mesa</span>
+          <span class="badge badge-green">Montaña</span>
+          <span class="badge badge-green">Teléfono</span>
+          <span class="badge badge-green">Libro</span>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(167,139,250,0.3);">
+        <div style="font-size:2.5rem; margin-bottom:.75rem;">💭</div>
+        <h3 style="font-family:var(--font-head); font-size:1.2rem; font-weight:700; color:#a78bfa; margin-bottom:.5rem;">
+          Palabras Abstractas
+        </h3>
+        <p style="color:var(--text-muted); font-size:.9rem; line-height:1.65; margin-bottom:1rem;">
+          Son aquellas que hacen referencia a ideas, sentimientos, cualidades o
+          conceptos que no son palpables ni visibles.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="badge badge-purple">Amor</span>
+          <span class="badge badge-purple">Justicia</span>
+          <span class="badge badge-purple">Libertad</span>
+          <span class="badge badge-purple">Felicidad</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Clave para identificar -->
+    <div class="card fade-in stagger-2" style="margin:1.25rem 0;">
+      <h3 style="font-family:var(--font-head); font-size:1rem; color:var(--text-muted); margin-bottom:1rem; text-transform:uppercase; letter-spacing:.07em;">
+        🔑 Clave para identificarlas
+      </h3>
+      <p style="line-height:1.8; color:var(--text);">
+        Hazte la pregunta: <strong style="color:var(--accent1);">¿Puedo verlo, tocarlo, olerlo, escucharlo o saborearlo?</strong><br>
+        Si la respuesta es <strong style="color:var(--success);">SÍ</strong> → es <strong>concreta</strong>.<br>
+        Si la respuesta es <strong style="color:#a78bfa;">NO</strong> → es <strong>abstracta</strong>.
+      </p>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🎮 Iniciar actividad →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════
+       PANTALLA 2: ACTIVIDAD
+  ════════════════════════ -->
+  <div class="screen" id="screen-actividad">
+
+    <!-- Marcador -->
+    <div class="score-bar fade-in">
+      <div class="score-item">
+        <div class="score-label">✅ Aciertos</div>
+        <div class="score-value" id="score-aciertos" style="color:var(--success);">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">❌ Errores</div>
+        <div class="score-value" id="score-errores" style="color:var(--danger);">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">📊 Progreso</div>
+        <div class="score-value" id="progress-text">0 / 15</div>
+      </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-wrap fade-in">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="activity-container" id="game-area">
+
+      <div class="card fade-in">
+        <p style="color:var(--text-muted); font-size:.85rem; text-align:center; margin-bottom:.25rem;">
+          ¿Esta palabra es concreta o abstracta?
+        </p>
+
+        <!-- Palabra + emoji -->
+        <div class="big-word" id="current-word">
+          <span id="word-emoji" style="font-size:.6em; display:block; margin-bottom:.25rem;"></span>
+          <span id="word-text"></span>
+        </div>
+
+        <!-- Botones de categoría -->
+        <div class="category-btns">
+          <button class="category-btn concreta" onclick="answer('concreta')">
+            👁️ Concreta
+          </button>
+          <button class="category-btn abstracta" onclick="answer('abstracta')">
+            💭 Abstracta
+          </button>
+        </div>
+
+        <!-- Feedback -->
+        <div class="feedback-box" id="feedback-box"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/palabras.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+</script>
+{% endblock %}
