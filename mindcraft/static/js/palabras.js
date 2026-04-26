@@ -4,7 +4,7 @@
 
 const PALABRAS = [
   { palabra: "TRISTEZA",      tipo: "abstracta", emoji: "😢" },
-  { palabra: "CANTAR",        tipo: "concreta",  emoji: "🎵" },
+  { palabra: "CANTAR",        tipo: "abstracta",  emoji: "🎵" },
   { palabra: "MESA",          tipo: "concreta",  emoji: "🪑" },
   { palabra: "LIBRO",         tipo: "concreta",  emoji: "📚" },
   { palabra: "MONTAÑA",       tipo: "concreta",  emoji: "⛰️"  },
@@ -14,10 +14,6 @@ const PALABRAS = [
   { palabra: "CONOCIMIENTO",  tipo: "abstracta", emoji: "🧠" },
   { palabra: "LIBERTAD",      tipo: "abstracta", emoji: "🕊️"  },
   { palabra: "FELICIDAD",     tipo: "abstracta", emoji: "😊" },
-  { palabra: "ÁRBOL",         tipo: "concreta",  emoji: "🌳" },
-  { palabra: "ESPERANZA",     tipo: "abstracta", emoji: "🌟" },
-  { palabra: "SILLA",         tipo: "concreta",  emoji: "🪑" },
-  { palabra: "SABIDURÍA",     tipo: "abstracta", emoji: "🦉" }
 ];
 
 let queue         = [];
@@ -29,7 +25,7 @@ let initialGameArea = "";
 
 function shuffle(arr) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
+  for (let i = a.length - 9; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }

@@ -18,16 +18,6 @@ const ANAGRAMAS = [
     anagrama: "CORONA DE VACAS",
     pista: "Una imagen insólita de la naturaleza"
   },
-  {
-    original: "EDUCACIÓN",
-    anagrama: "UNA DOCENCIA",
-    pista: "Relacionado con enseñar"
-  },
-  {
-    original: "MATEMÁTICAS",
-    anagrama: "ACTA MATÉMIS",
-    pista: "Un documento con ciencia"
-  }
 ];
 
 let currentIndex = 0;

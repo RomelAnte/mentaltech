@@ -8,7 +8,7 @@ let resultShown  = false;
 
 /* ── Generar un número aleatorio hasta 4 cifras ── */
 function generarNumero() {
-  const num = Math.floor(Math.random() * 9000) + 1000; // 1000–9999
+  const num = Math.floor(Math.random() * 900) + 100; // 100–999
   displaySingleNumber(num);
   playEffect();
 }
@@ -16,9 +16,9 @@ function generarNumero() {
 /* ── Generar suma de 3 números ── */
 function generarSuma() {
   const nums = [
-    Math.floor(Math.random() * 9000) + 1000,
-    Math.floor(Math.random() * 900)  + 100,
-    Math.floor(Math.random() * 9000) + 1000
+    Math.floor(Math.random() * 900) + 100,
+    Math.floor(Math.random() * 900) + 100,
+    Math.floor(Math.random() * 900) + 100
   ];
   lastNumbers = nums;
   lastResult  = nums.reduce((a, b) => a + b, 0);
