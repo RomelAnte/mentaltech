@@ -1,0 +1,116 @@
+{% extends "mindcraft/base.html" %}
+{% block title %}MentalTech — Técnicas Avanzadas de Estudio{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- ── HERO: Slide de portada ── -->
+  <section class="slide-hero fade-in">
+
+    <!-- Decoración de fondo -->
+    <div class="slide-bg-ring ring1"></div>
+    <div class="slide-bg-ring ring2"></div>
+
+    <div class="slide-hero-inner">
+      <p class="slide-tag">✦ Técnicas Avanzadas de Estudio · ILVEM</p>
+
+      <h1 class="slide-hero-title">
+        <span class="gradient-text">MentalTech</span>
+      </h1>
+
+      <p class="slide-hero-subtitle">Entrena tu mente. Demuestra tu potencial.</p>
+
+      <!-- 3 módulos como píldoras visuales -->
+      <div class="hero-pills">
+        <div class="hero-pill">
+          <span class="pill-icon">🔤</span>
+          <span>Anagramas</span>
+        </div>
+        <div class="hero-pill">
+          <span class="pill-icon">🧠</span>
+          <span>Palabras</span>
+        </div>
+        <div class="hero-pill">
+          <span class="pill-icon">🔢</span>
+          <span>Ábaco</span>
+        </div>
+      </div>
+
+      <!-- Nombre del estudiante -->
+      <div class="slide-author">
+        <div class="author-dot"></div>
+        <span>Romel Ante &nbsp;·&nbsp; Demo TAE</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── MÓDULOS: Cards tipo slide ── -->
+  <section class="modules-grid">
+
+    <!-- Módulo 1 -->
+    <a href="{% url 'anagramas' %}" class="module-card card-blue fade-in stagger-1">
+      <div class="module-slide-icon">🔤</div>
+      <p class="module-number">Módulo 01</p>
+      <h2 class="module-title">Anagramas</h2>
+      <p class="module-desc">Reorganiza letras. Descubre nuevas palabras.</p>
+      <div class="module-tags">
+        <span class="badge badge-blue">Memoria</span>
+        <span class="badge badge-blue">Creatividad</span>
+      </div>
+      <span class="module-arrow">Comenzar →</span>
+    </a>
+
+    <!-- Módulo 2 -->
+    <a href="{% url 'palabras' %}" class="module-card card-purple fade-in stagger-2">
+      <div class="module-slide-icon">🧠</div>
+      <p class="module-number">Módulo 02</p>
+      <h2 class="module-title">Palabras</h2>
+      <p class="module-desc">Concretas vs abstractas. ¿Puedes distinguirlas?</p>
+      <div class="module-tags">
+        <span class="badge badge-purple">Concretas</span>
+        <span class="badge badge-purple">Abstractas</span>
+      </div>
+      <span class="module-arrow" style="color:#a78bfa;">Comenzar →</span>
+    </a>
+
+    <!-- Módulo 3 -->
+    <a href="{% url 'abaco' %}" class="module-card card-cyan fade-in stagger-3">
+      <div class="module-slide-icon">🔢</div>
+      <p class="module-number">Módulo 03</p>
+      <h2 class="module-title">Ábaco</h2>
+      <p class="module-desc">Calcula con velocidad y precisión mental.</p>
+      <div class="module-tags">
+        <span class="badge badge-green">Sumas</span>
+        <span class="badge badge-green">Cálculo mental</span>
+      </div>
+      <span class="module-arrow" style="color:var(--accent3);">Comenzar →</span>
+    </a>
+
+  </section>
+
+  <!-- ── 4 STATS visuales ── -->
+  <section class="stats-row fade-in stagger-4">
+    <div class="stat-block">
+      <div class="stat-num gradient-text">3</div>
+      <div class="stat-label">Módulos</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num gradient-text">🎯</div>
+      <div class="stat-label">Aprendizaje activo</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num gradient-text">📊</div>
+      <div class="stat-label">Puntaje en vivo</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num gradient-text">🚀</div>
+      <div class="stat-label">Sin distracciones</div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

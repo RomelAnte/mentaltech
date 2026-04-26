@@ -1,0 +1,163 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Palabras — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="tabs-row fade-in">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">← Volver</a>
+  </div>
+
+  <!-- ════════════ PRESENTACIÓN ════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <!-- SLIDE 1: Portada -->
+    <div class="pres-slide slide-cover fade-in">
+      <div class="slide-bg-ring ring1" style="background:radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%);"></div>
+      <div class="slide-number-tag">02 / Palabras</div>
+      <div class="slide-cover-icon">🧠</div>
+      <h1 class="slide-cover-title">
+        Palabras <span class="gradient-text">Concretas</span>
+        <br>y <span class="gradient-text">Abstractas</span>
+      </h1>
+      <p class="slide-cover-def">¿Lo puedes ver, tocar u oír? Esa es la clave.</p>
+    </div>
+
+    <!-- SLIDE 2: La regla de oro — visual -->
+    <div class="pres-slide fade-in stagger-1">
+      <p class="slide-label">✦ La regla de oro</p>
+      <div class="rule-visual">
+        <div class="rule-question">
+          <span class="rule-icon">❓</span>
+          <p>¿Puedo percibirlo<br>con mis sentidos?</p>
+        </div>
+        <div class="rule-branches">
+          <div class="rule-branch branch-yes">
+            <div class="branch-line line-yes"></div>
+            <div class="branch-answer ans-yes">
+              <span class="ans-icon">✅ SÍ</span>
+              <strong>CONCRETA</strong>
+              <span class="ans-example">mesa · libro · montaña</span>
+            </div>
+          </div>
+          <div class="rule-branch branch-no">
+            <div class="branch-line line-no"></div>
+            <div class="branch-answer ans-no">
+              <span class="ans-icon">💭 NO</span>
+              <strong>ABSTRACTA</strong>
+              <span class="ans-example">amor · justicia · libertad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Comparativa visual de 2 columnas -->
+    <div class="pres-slide fade-in stagger-2">
+      <p class="slide-label">✦ Comparativa</p>
+      <div class="compare-cols">
+        <div class="compare-col col-concreta">
+          <div class="compare-col-head">
+            <span style="font-size:2.5rem;">👁️</span>
+            <h3>Concretas</h3>
+          </div>
+          <div class="compare-words">
+            <span class="badge badge-green">Mesa</span>
+            <span class="badge badge-green">Libro</span>
+            <span class="badge badge-green">Montaña</span>
+            <span class="badge badge-green">Teléfono</span>
+            <span class="badge badge-green">Árbol</span>
+            <span class="badge badge-green">Silla</span>
+          </div>
+        </div>
+        <div class="compare-divider">
+          <svg width="2" height="180" viewBox="0 0 2 180"><line x1="1" y1="0" x2="1" y2="180" stroke="url(#dg)" stroke-width="2"/>
+          <defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop stop-color="#34d399"/><stop offset="1" stop-color="#a78bfa"/>
+          </linearGradient></defs></svg>
+        </div>
+        <div class="compare-col col-abstracta">
+          <div class="compare-col-head">
+            <span style="font-size:2.5rem;">💭</span>
+            <h3>Abstractas</h3>
+          </div>
+          <div class="compare-words">
+            <span class="badge badge-purple">Amor</span>
+            <span class="badge badge-purple">Justicia</span>
+            <span class="badge badge-purple">Libertad</span>
+            <span class="badge badge-purple">Tristeza</span>
+            <span class="badge badge-purple">Felicidad</span>
+            <span class="badge badge-purple">Sabiduría</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0 4rem;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🎮 Iniciar actividad →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════ ACTIVIDAD ════════════ -->
+  <div class="screen" id="screen-actividad">
+    <div class="score-bar fade-in">
+      <div class="score-item">
+        <div class="score-label">✅ Aciertos</div>
+        <div class="score-value" id="score-aciertos" style="color:var(--success);">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">❌ Errores</div>
+        <div class="score-value" id="score-errores" style="color:var(--danger);">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">📊 Progreso</div>
+        <div class="score-value" id="progress-text">0 / 15</div>
+      </div>
+    </div>
+    <div class="progress-wrap fade-in">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+    <div class="activity-container" id="game-area">
+      <div class="card fade-in">
+        <p style="color:var(--text-muted); font-size:.85rem; text-align:center; margin-bottom:.25rem;">
+          ¿Esta palabra es concreta o abstracta?
+        </p>
+        <div class="big-word" id="current-word">
+          <span id="word-emoji" style="font-size:.6em; display:block; margin-bottom:.25rem;"></span>
+          <span id="word-text"></span>
+        </div>
+        <div class="category-btns">
+          <button class="category-btn concreta" onclick="answer('concreta')">👁️ Concreta</button>
+          <button class="category-btn abstracta" onclick="answer('abstracta')">💭 Abstracta</button>
+        </div>
+        <div class="feedback-box" id="feedback-box"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/palabras.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+</script>
+{% endblock %}

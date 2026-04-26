@@ -1,0 +1,194 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Ábaco — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="tabs-row fade-in">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">← Volver</a>
+  </div>
+
+  <!-- ════════════ PRESENTACIÓN ════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <!-- SLIDE 1: Portada -->
+    <div class="pres-slide slide-cover fade-in">
+      <div class="slide-bg-ring ring1" style="background:radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);"></div>
+      <div class="slide-number-tag">03 / Ábaco</div>
+      <div class="slide-cover-icon">🧮</div>
+      <h1 class="slide-cover-title">El <span class="gradient-text">Ábaco Soroban</span></h1>
+      <p class="slide-cover-def">Instrumento milenario para el cálculo mental de precisión.</p>
+    </div>
+
+    <!-- SLIDE 2: ¿Qué es? — visual con SVG del ábaco -->
+    <div class="pres-slide fade-in stagger-1">
+      <p class="slide-label">✦ ¿Qué es?</p>
+      <div class="abaco-diagram">
+        <!-- SVG del ábaco estilizado -->
+        <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" class="abaco-svg">
+          <!-- Marco -->
+          <rect x="10" y="10" width="400" height="180" rx="12" fill="#1a2235" stroke="rgba(99,179,237,0.3)" stroke-width="1.5"/>
+          <!-- Barra divisora horizontal -->
+          <rect x="10" y="75" width="400" height="4" fill="rgba(99,179,237,0.4)"/>
+          <!-- 4 varillas -->
+          <line x1="80"  y1="20" x2="80"  y2="185" stroke="rgba(99,179,237,0.25)" stroke-width="2"/>
+          <line x1="180" y1="20" x2="180" y2="185" stroke="rgba(99,179,237,0.25)" stroke-width="2"/>
+          <line x1="280" y1="20" x2="280" y2="185" stroke="rgba(99,179,237,0.25)" stroke-width="2"/>
+          <line x1="380" y1="20" x2="380" y2="185" stroke="rgba(99,179,237,0.25)" stroke-width="2"/>
+          <!-- Cuentas superiores (1 por varilla = 5 unidades) -->
+          <circle cx="80"  cy="55" r="14" fill="#63b3ed" opacity="0.9"/>
+          <circle cx="180" cy="55" r="14" fill="#63b3ed" opacity="0.9"/>
+          <circle cx="280" cy="55" r="14" fill="#63b3ed" opacity="0.9"/>
+          <circle cx="380" cy="55" r="14" fill="#63b3ed" opacity="0.9"/>
+          <!-- Cuentas inferiores (4 por varilla) -->
+          <circle cx="80"  cy="100" r="14" fill="#7c5cbf" opacity="0.85"/>
+          <circle cx="80"  cy="128" r="14" fill="#7c5cbf" opacity="0.7"/>
+          <circle cx="80"  cy="156" r="14" fill="#7c5cbf" opacity="0.5"/>
+          <circle cx="80"  cy="184" r="14" fill="#7c5cbf" opacity="0.3"/>
+
+          <circle cx="180" cy="100" r="14" fill="#7c5cbf" opacity="0.85"/>
+          <circle cx="180" cy="128" r="14" fill="#7c5cbf" opacity="0.7"/>
+          <circle cx="180" cy="156" r="14" fill="#7c5cbf" opacity="0.5"/>
+          <circle cx="180" cy="184" r="14" fill="#7c5cbf" opacity="0.3"/>
+
+          <circle cx="280" cy="100" r="14" fill="#7c5cbf" opacity="0.85"/>
+          <circle cx="280" cy="128" r="14" fill="#7c5cbf" opacity="0.7"/>
+          <circle cx="280" cy="156" r="14" fill="#7c5cbf" opacity="0.5"/>
+          <circle cx="280" cy="184" r="14" fill="#7c5cbf" opacity="0.3"/>
+
+          <circle cx="380" cy="100" r="14" fill="#7c5cbf" opacity="0.85"/>
+          <circle cx="380" cy="128" r="14" fill="#7c5cbf" opacity="0.7"/>
+          <circle cx="380" cy="156" r="14" fill="#7c5cbf" opacity="0.5"/>
+          <circle cx="380" cy="184" r="14" fill="#7c5cbf" opacity="0.3"/>
+
+          <!-- Labels debajo -->
+          <text x="80"  y="205" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">Millares</text>
+          <text x="180" y="205" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">Centenas</text>
+          <text x="280" y="205" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">Decenas</text>
+          <text x="380" y="205" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">Unidades</text>
+        </svg>
+        <p class="slide-caption" style="margin-top:1.5rem;">Cuentas azules = 5 · Cuentas moradas = 1</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: 4 beneficios visuales -->
+    <div class="pres-slide fade-in stagger-2">
+      <p class="slide-label">✦ Beneficios</p>
+      <div class="benefits-visual">
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">🎯</div>
+          <strong>Concentración</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">⚡</div>
+          <strong>Velocidad</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">🧠</div>
+          <strong>Memoria</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">🔢</div>
+          <strong>Cálculo mental</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Cómo usar — 4 pasos iconográficos -->
+    <div class="pres-slide fade-in stagger-3">
+      <p class="slide-label">✦ Cómo usar esta herramienta</p>
+      <div class="steps-visual">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-icon">🎲</div>
+          <p>Genera un número</p>
+        </div>
+        <div class="step-connector">→</div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-icon">🧮</div>
+          <p>Represéntalo en tu ábaco</p>
+        </div>
+        <div class="step-connector">→</div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-icon">➕</div>
+          <p>Genera una suma</p>
+        </div>
+        <div class="step-connector">→</div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-icon">✅</div>
+          <p>Verifica el resultado</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0 4rem;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🔢 Generar números →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════ ACTIVIDAD ════════════ -->
+  <div class="screen" id="screen-actividad">
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;" class="fade-in">
+      <button class="btn btn-primary btn-lg" onclick="generarNumero()">🎲 Generar número</button>
+      <button class="btn btn-secondary btn-lg" onclick="generarSuma()" style="border-color:rgba(56,189,248,0.4); color:var(--accent3);">➕ Generar suma</button>
+    </div>
+    <div id="display-area" class="fade-in"></div>
+    <div class="card fade-in" style="margin-top:1.5rem;">
+      <h3 style="font-family:var(--font-head); font-size:.9rem; color:var(--text-muted); margin-bottom:.75rem; text-transform:uppercase; letter-spacing:.07em;">
+        📐 Posición de las cuentas
+      </h3>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; text-align:center;">
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🟤</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Millares</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">1,000s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🔵</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Centenas</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">100s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🟢</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Decenas</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">10s</div>
+        </div>
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.75rem;">
+          <div style="font-size:1.5rem; margin-bottom:.25rem;">🔴</div>
+          <div style="font-family:var(--font-head); font-weight:700; font-size:.95rem;">Unidades</div>
+          <div style="color:var(--text-muted); font-size:.78rem;">1s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/abaco.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+    if (name === 'actividad') generarNumero();
+  }
+</script>
+{% endblock %}

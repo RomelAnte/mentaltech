@@ -1,0 +1,156 @@
+{% extends "mindcraft/base.html" %}
+{% load static %}
+{% block title %}Anagramas — MentalTech{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Tabs -->
+  <div class="tabs-row fade-in">
+    <div class="module-tabs">
+      <button class="module-tab active" id="tab-presentacion" onclick="showScreen('presentacion')">
+        📖 Presentación
+      </button>
+      <button class="module-tab" id="tab-actividad" onclick="showScreen('actividad')">
+        🎮 Actividad
+      </button>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="font-size:.85rem; padding:.5rem 1rem;">← Volver</a>
+  </div>
+
+  <!-- ════════════ PRESENTACIÓN ════════════ -->
+  <div class="screen active" id="screen-presentacion">
+
+    <!-- SLIDE 1: Portada del módulo -->
+    <div class="pres-slide slide-cover fade-in">
+      <div class="slide-bg-ring ring1"></div>
+      <div class="slide-number-tag">01 / Anagramas</div>
+      <div class="slide-cover-icon">🔤</div>
+      <h1 class="slide-cover-title">¿Qué es un <span class="gradient-text">Anagrama</span>?</h1>
+      <p class="slide-cover-def">
+        Reorganización de letras de una palabra para formar otra completamente diferente.
+      </p>
+    </div>
+
+    <!-- SLIDE 2: Ejemplo visual grande -->
+    <div class="pres-slide fade-in stagger-1">
+      <p class="slide-label">✦ Ejemplo</p>
+      <div class="anagrama-visual">
+        <div class="anagrama-word word-original">CINEMATÓGRAFO</div>
+        <div class="anagrama-arrow">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M8 24h32M28 14l12 10-12 10" stroke="url(#ag)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="ag" x1="8" y1="24" x2="40" y2="24" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#63b3ed"/><stop offset="1" stop-color="#a78bfa"/>
+            </linearGradient></defs>
+          </svg>
+        </div>
+        <div class="anagrama-word word-new">MECANÓGRAFO TÍO</div>
+      </div>
+      <p class="slide-caption">Mismas letras · Orden diferente · Nuevo significado</p>
+    </div>
+
+    <!-- SLIDE 3: Más ejemplos en 2 columnas -->
+    <div class="pres-slide fade-in stagger-2">
+      <p class="slide-label">✦ Más ejemplos</p>
+      <div class="examples-grid">
+        <div class="example-pair">
+          <span class="badge badge-blue ex-badge">CALENDARIO</span>
+          <span class="ex-arrow">→</span>
+          <span class="badge badge-purple ex-badge">ACLARO EN DÍA</span>
+        </div>
+        <div class="example-pair">
+          <span class="badge badge-blue ex-badge">CONVERSACIÓN</span>
+          <span class="ex-arrow">→</span>
+          <span class="badge badge-purple ex-badge">CORONA DE VACAS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Beneficios — 4 íconos grandes, texto mínimo -->
+    <div class="pres-slide fade-in stagger-3">
+      <p class="slide-label">✦ ¿Por qué practicarlos?</p>
+      <div class="benefits-visual">
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">🧠</div>
+          <strong>Memoria</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">🎯</div>
+          <strong>Concentración</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">✨</div>
+          <strong>Creatividad</strong>
+        </div>
+        <div class="benefit-visual-item">
+          <div class="benefit-big-icon">⚡</div>
+          <strong>Agilidad mental</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding:2rem 0 4rem;">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('actividad')">
+        🎮 Comenzar actividad →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ════════════ ACTIVIDAD ════════════ -->
+  <div class="screen" id="screen-actividad">
+
+    <div class="score-bar fade-in">
+      <div class="score-item">
+        <div class="score-label">✅ Aciertos</div>
+        <div class="score-value" id="score-aciertos" style="transition:all .3s;">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">🎯 Intentos</div>
+        <div class="score-value" id="score-intentos">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">📊 Precisión</div>
+        <div class="score-value" id="score-pct">—</div>
+      </div>
+    </div>
+
+    <div class="activity-container">
+      <div class="card fade-in">
+        <p style="color:var(--text-muted); font-size:.85rem; text-align:center; margin-bottom:.5rem;">
+          Forma un anagrama con esta palabra:
+        </p>
+        <div class="big-word" id="word-original">CARGANDO...</div>
+        <div class="input-group">
+          <input type="text" class="input-field" id="user-input" placeholder="Escribe el anagrama..." autocomplete="off">
+          <button class="btn btn-primary" onclick="checkAnswer()">Verificar</button>
+        </div>
+        <div class="feedback-box" id="feedback-box"></div>
+        <div id="answer-reveal" style="display:none; margin-top:1rem;">
+          <p style="color:var(--text-muted); font-size:.85rem; margin-bottom:.5rem;">La respuesta es:</p>
+          <div style="font-family:var(--font-head); font-size:1.6rem; font-weight:700; color:var(--accent4);" id="answer-text"></div>
+        </div>
+        <div style="display:flex; gap:.75rem; margin-top:1.5rem; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="btn-reveal" onclick="revealAnswer()">💡 Ver respuesta</button>
+          <button class="btn btn-primary" onclick="nextAnagrama()">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/anagramas.js' %}"></script>
+<script>
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}MentalTech{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+
+  <!-- ── Navegación ── -->
+  <nav class="navbar">
+    <a href="{% url 'dashboard' %}" class="navbar-brand">
+      <span class="brand-dot"></span>
+      MentalTech
+    </a>
+    <ul class="navbar-links">
+      <li><a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+        <span class="nav-icon">🏠</span> Inicio
+      </a></li>
+      <li><a href="{% url 'anagramas' %}" class="{% if request.resolver_match.url_name == 'anagramas' %}active{% endif %}">
+        <span class="nav-icon">🔤</span> Anagramas
+      </a></li>
+      <li><a href="{% url 'palabras' %}" class="{% if request.resolver_match.url_name == 'palabras' %}active{% endif %}">
+        <span class="nav-icon">🧠</span> Palabras
+      </a></li>
+      <li><a href="{% url 'abaco' %}" class="{% if request.resolver_match.url_name == 'abaco' %}active{% endif %}">
+        <span class="nav-icon">🔢</span> Ábaco
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Contenido principal ── -->
+  <main class="page-wrapper">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="page-footer">
+    MentalTech &nbsp;·&nbsp; Herramienta Educativa Interactiva &nbsp;·&nbsp; Demo Académica
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
