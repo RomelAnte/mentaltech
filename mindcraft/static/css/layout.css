@@ -501,6 +501,51 @@ body::before {
 
 .input-field::placeholder { color: var(--text-muted); }
 
+.answer-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.answer-option {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s, box-shadow .2s, background .2s, color .2s;
+}
+
+.answer-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(99,179,237,0.4);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.answer-option:disabled {
+  cursor: default;
+  opacity: 0.95;
+}
+
+.answer-option.correct {
+  background: rgba(52,211,153,0.12);
+  border-color: rgba(52,211,153,0.4);
+  color: var(--success);
+}
+
+.answer-option.wrong {
+  background: rgba(248,113,113,0.12);
+  border-color: rgba(248,113,113,0.4);
+  color: var(--danger);
+}
+
 /* ── Feedback ── */
 .feedback-box {
   border-radius: var(--radius);
